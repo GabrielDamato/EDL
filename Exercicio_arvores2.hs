@@ -26,20 +26,20 @@ dobra :: Arvore -> Arvore
 dobra Folha = Folha
 dobra (Galho v l r) = Galho (v*2) (dobra l) (dobra r)
 
-possui :: Arvore -> Int -> String
-possui Folha n = "nao achei"
-possui (Galho v l r) n = if v==n then "achei" 
-                        else if (possui l n)=="achei" then "achei"
+possui :: Arvore -> Int -> Bool
+possui Folha n = False
+possui (Galho v l r) n = if v==n then True 
+                        else if (possui l n) == True then True
                         else (possui r n)
 
-possui_busca :: Arvore -> Int -> String
-possui_busca Folha n = "nao achei"
-possui_busca (Galho v l r) n = if n == v then "achei"
+possui_busca :: Arvore -> Int -> Bool
+possui_busca Folha n = False
+possui_busca (Galho v l r) n = if n == v then True
                               else if (n < v) then (possui l n)
                               else (possui r n)
 
 -- Outra sintaxe
---possui_busca (Galho v l r) n | n == v = "achei"
+--possui_busca (Galho v l r) n | n == v = True
                             -- | n < v = (possui_busca l n)
                             -- | n > v = (possui_busca r n)
 
@@ -72,5 +72,4 @@ main = do putStrLn ("\nFolhas:\n")
           putStrLn ("\nMaximo:\n")
           print(maximo a1)
           putStrLn ("\nInsere:\n")
-          
           print(insere a3 0)
